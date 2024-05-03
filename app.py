@@ -57,7 +57,7 @@ widely for early cancer-detection.
 def blood_cancer():
 	if request.method == 'POST':
 		class_names =["[Malignant] early Pre-B","[Malignant] Pre-B","[Malignant] Pro-B","Benign"]
-		model = tf.keras.models.load_model("./Blood_Cancer.h5")
+		model = tf.keras.models.load_model("./static/Blood_Cancer.h5")
 		image = request.files["file"]
 		image = np.array(Image.open(image).convert("RGB").resize((256,256)))
 		image = image/255
@@ -78,7 +78,7 @@ def brain_tumor():
 	if request.method == 'POST':
 		print(request.form)
 		class_names =['Effected', 'Healthy']
-		model = tf.keras.models.load_model("./Brain_Model.h5")
+		model = tf.keras.models.load_model("./static/Brain_Model.h5")
 		image = request.files["file"]
 		image = np.array(Image.open(image).resize((256,256)))
 		img_array = tf.expand_dims(image,0)
@@ -100,7 +100,7 @@ def brain_tumor():
 def breast_cancer():
 	if request.method == 'POST':
 		class_names =['Effected', 'Healthy','Less_Effected']
-		model = tf.keras.models.load_model("./Custom_Resnet_1.h5")
+		model = tf.keras.models.load_model("./static/Custom_Resnet_1.h5")
 		image = request.files["file"]
 		image = np.array(Image.open(image).convert("RGB").resize((224,224)))
 		img_array = tf.expand_dims(image,0)
@@ -116,7 +116,7 @@ def breast_cancer():
 def fatal_disease():
 	return "Under Construction !!!!!!!!"
 	# if request.method == 'POST':
-	# 	model = joblib.load('trained_model_1.joblib')
+	# 	model = joblib.load('./static/trained_model_1.joblib')
 	# 	data = np.array(request.get_json())
 	# 	reshaped_data = data.reshape(1, -1)  # Reshape to match the expected format
 	# 	pred = model.predict(reshaped_data)
@@ -127,7 +127,7 @@ def fatal_disease():
 @app.route('/mental',methods=['GET','POST'])
 def mental_disease():
 	if request.method == 'POST':
-		model = joblib.load('trained_model_1.joblib')
+		model = joblib.load('./static/trained_model_1.joblib')
 		data = np.array(request.get_json()) # accepting data as json
 		reshaped_data = data.reshape(1, -1)  # Reshape to match the expected format
 		pred = model.predict(reshaped_data)
